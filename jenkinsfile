@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    environment {
+        SERVER_CREDENTIALS = credentials('server_credentials')
+    }
     stages {
         stage('build') {
             steps {
@@ -9,14 +12,18 @@ pipeline {
             }
         }
         stage('test') {
-            when {
-                expression {
-                    3 < 2
-                }
-            }
+            
+            
             steps {
                 script {
                     echo "Testing the application..."
+                }
+            }
+        }
+        stage("env_test") {
+            steps {
+                script {
+                    echo "${SERVER_CREDENTIALS}"
                 }
             }
         }
