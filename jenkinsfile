@@ -9,7 +9,11 @@ pipeline {
             }
         }
         stage('test') {
-            
+            when {
+                expression {
+                    3 > 2
+                }
+            }
             steps {
                 script {
                     echo "Testing the application..."
